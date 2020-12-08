@@ -42,12 +42,12 @@ void setup() {
   if (EEPROM.read(1023) != 0) // первый запуск и установка переменных
   {   
     EEPROM.put(1023, 0);
-    EEPROM.put(10, FLIP_EFFECT);
+    EEPROM.put(0, FLIP_EFFECT);
     EEPROM.put(1, BACKL_MODE);
     EEPROM.put(2, GLITCH_ALLOWED);
     EEPROM.put(3, ALARM_POWER);
   }
-  EEPROM.get(10, FLIP_EFFECT);
+  EEPROM.get(0, FLIP_EFFECT);
   EEPROM.get(1, BACKL_MODE);
   EEPROM.get(2, GLITCH_ALLOWED);
   EEPROM.get(3, ALARM_POWER);

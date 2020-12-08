@@ -11,7 +11,6 @@ timerMinim dotTimer(500);                // полсекундный тайме�
 timerMinim dotBrightTimer(DOT_TIMER);    // таймер шага яркости точки
 timerMinim backlBrightTimer(30);         // таймер шага яркости подсветки//?
 timerMinim almTimer(ALM_TIMEOUT * 1000);  // таймер времени писка будильника
-//timerMinim almTimer(600000);  // таймер времени писка будильника
 timerMinim flipTimer(FLIP_SPEED[FLIP_EFFECT]);
 timerMinim glitchTimer(1000);
 timerMinim blinkTimer(500);

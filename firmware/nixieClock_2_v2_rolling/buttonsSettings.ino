@@ -1,3 +1,4 @@
+byte noChech;//переменная, чтобы не сбрасывалось время после настройки будильника
 void settingsTick() {
   if (curMode == 1) 
   {
@@ -122,9 +123,9 @@ void buttonsTick()
         indiDimm[i] = indiMaxBright;
         anodeStates[i] = 1;
       }
-      // показать эффект
-      newTimeFlag = true;
+      // показать эффект      
       for (byte i = 0; i < 4; i++) indiDigits[i] = FLIP_EFFECT;
+      newTimeFlag = true;
     }
 
     // переключение эффектов подсветки
@@ -142,7 +143,9 @@ void buttonsTick()
     // переключение глюков
     if (btnL.isHolded()) 
     {
-      GLITCH_ALLOWED = !GLITCH_ALLOWED;      
+      GLITCH_ALLOWED = !GLITCH_ALLOWED;  
+      for (byte i = 0; i < 4; i++) {indiDigits[i] = GLITCH_ALLOWED;}         
+      for (byte i = 0; i < 4; i++) {indiDimm[i] = indiMaxBright;}       
       EEPROM.put(2, GLITCH_ALLOWED);
         if(GLITCH_ALLOWED)
         {
@@ -158,8 +161,10 @@ void buttonsTick()
         {
           beep(1);
           delay(20);
-          beep(0);
+          beep(0);            
         }
+        delay(500);          
+        newTimeFlag=1; 
     }
 }
 
@@ -172,26 +177,28 @@ void buttonsTick()
     currentDigit = 0;    
     curMode = !curMode;    
     switch (curMode) 
-    {//Запись после настройки
+     {//Запись после настройки
         case 0:
-        hrs = changeHrs;
-        mins = changeMins;
-        secs = 0;
+        newTimeFlag = true;
+        if(noChech==0)
+        {
+          hrs = changeHrs;
+          mins = changeMins;
+          secs = 0;        
+          rtc.adjust(DateTime(2019, 12, 05, hrs, mins, 0));
+        }
         alm_hrs = changeHrs2;
         alm_mins = changeMins2;
         EEPROM.put(4, alm_hrs);     // часы будильника
-        EEPROM.put(5, alm_mins);     // минуты будильника
-        rtc.adjust(DateTime(2019, 12, 05, hrs, mins, 0));
-        newTimeFlag=1;
-        changeBright();
+        EEPROM.put(5, alm_mins);     // минуты будильника        
+        changeBright();        
         break;        
         case 1:
         changeHrs2 = alm_hrs;
         changeMins2 = alm_mins;
         changeHrs = hrs;
         changeMins = mins;
-        break;        
-
+        break;   
     }
   }
 
@@ -235,6 +242,14 @@ void buttonsTick()
     if(currentDigit>=4)
     {
       currentDigit=0; 
-    }    
+    }   
+    if(currentDigit==0||currentDigit==1)
+        {
+          noChech=0;    
+        }
+        else
+        {
+          noChech=1; 
+        } 
   }
 }

@@ -1,3 +1,9 @@
+#define RECALIBRATE_MILLIS 8
+#define delay(x) (delay((x)*RECALIBRATE_MILLIS))
+#define delayMicroseconds(x) (delayMicroseconds((x)*RECALIBRATE_MILLIS))
+#define millis() (millis() / RECALIBRATE_MILLIS)
+#define micros() (micros() / RECALIBRATE_MILLIS)
+
 // библиотеки
 #include "timer2Minim.h"
 #include <GyverButton.h>
@@ -161,7 +167,11 @@ void setPWM(uint8_t pin, uint16_t duty) {
 
 void beep(boolean on) {
   #if (BEEPER_TYPE == 0)
-  isBeeping = on;
+  if (on) {
+    tone(PIEZO,600);
+  } else {
+    noTone(PIEZO);
+  }
   #elif (BEEPER_TYPE == 1)
   setPin(PIEZO, on);
   #endif

@@ -10,4 +10,5 @@ void loop() {
   buttonsTick();                                  // кнопки
   settingsTick();                                 // настройки
   Alarm(); 
+  playerTick();
 }

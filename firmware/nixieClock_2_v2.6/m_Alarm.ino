@@ -15,20 +15,20 @@ void Alarm(){
               anodeStates[1] = 0;
               anodeStates[2] = 0;
               anodeStates[3] = 0;
-              beep(0);
+              //beep(0);
             } else {
                 anodeStates[0] = 1;
                 anodeStates[1] = 1;
                 anodeStates[2] = 1;
                 anodeStates[3] = 1;  
-               beep(1);
+               play();
             }
            } 
             if (almTimer.isReady()) //Выключить Будильник 
           {
             alm_flag = 0;
             almTimer.stop();            
-            beep(0);
+            noPlay();
             lampState = 1;
             anodeStates[0] = 1;
             anodeStates[1] = 1;

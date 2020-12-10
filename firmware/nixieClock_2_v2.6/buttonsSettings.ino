@@ -223,7 +223,7 @@ void buttonsTick()
     if(curMode == 0 && alm_flag)
     {
        alm_flag=0;
-       beep(0);
+       noPlay();
        lampState = 1;
        anodeStates[0] = 1;
        anodeStates[1] = 1;

@@ -87,11 +87,15 @@
 
 #define BEEPER_FREQ 600	// при BEEPER_TYPE=0: частота пищания
 
-#define ALARM_TYPE 0
+#define ALARM_TYPE 1
 // 0 - пищание, синхронное с миганием цифр
-// 1 - проигрывание мелодии
+// 1 - проигрывание мелодии (только для BEEPER_TYPE=0)
 
 uint32_t ALM_TIMEOUT = 9999;      // время пищания будильника в секундах
+
+#if (BEEPER_TYPE == 1 && ALARM_TYPE == 1)
+	#error ALARM_TYPE=1 is allowed in BEEPER_TYPE=0 device only!
+#endif
 
 // ======================= ЭФФЕКТЫ =======================
 byte FLIP_EFFECT = 1;// эффекты перелистывания часов

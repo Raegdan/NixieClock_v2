@@ -36,7 +36,7 @@ void buttonsTick()
     
   if (curMode == 1) 
   {
-    if (btnR.isStep()||btnR.isClick()) 
+    if (btnR.isClick()) 
     {
       if (currentDigit==0) 
       {
@@ -74,7 +74,7 @@ void buttonsTick()
      else {sendTime(changeHrs2, changeMins2);}
        
     
-    if (btnL.isStep()||btnL.isClick()) 
+    if (btnL.isClick()) 
     {
       if (currentDigit==0) 
       {
@@ -112,7 +112,8 @@ void buttonsTick()
   
   
   if (curMode == 0) 
-{ 
+{
+  
     // переключение эффектов цифр
     if (btnR.isClick()) {
       if (++FLIP_EFFECT >= FLIP_EFFECT_NUM) FLIP_EFFECT = 0;
@@ -174,11 +175,7 @@ void buttonsTick()
     anodeStates[2] = 1;
     anodeStates[3] = 1;
     currentDigit = 0;    
-    curMode = !curMode;   
-    btnSet.resetStates();
-    btnL.resetStates();
-    btnR.resetStates();
-   
+    curMode = !curMode;    
     switch (curMode) 
      {//Запись после настройки
         case 0:
@@ -230,11 +227,10 @@ void buttonsTick()
         beep(0);           
       }
     }  
-    newTimeFlag = true;
     if(curMode == 0 && alm_flag)
     {
        alm_flag=0;
-       beep(0);
+       noPlay();
        lampState = 1;
        anodeStates[0] = 1;
        anodeStates[1] = 1;

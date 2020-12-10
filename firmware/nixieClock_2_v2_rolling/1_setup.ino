@@ -2,8 +2,6 @@ void setup() {
   //Serial.begin(9600);
   // случайное зерно для генератора случайных чисел
   randomSeed(analogRead(6) + analogRead(7));
-  btnL.setStepTimeout(100);
-  btnR.setStepTimeout(100);
 
   // настройка пинов на выход
   pinMode(DECODER0, OUTPUT);
@@ -25,10 +23,8 @@ void setup() {
   // включаем ШИМ
   setPWM(9, DUTY);
 
-  // перенастраиваем частоту ШИМ на пинах 3 и 11 на 7.8 кГц и разрешаем прерывания COMPA
-  TCCR2B = (TCCR2B & B11111000) | 1;    // делитель 8
-  TCCR2A |= (1 << WGM21);   // включить CTC режим для COMPA
-  TIMSK2 |= (1 << OCIE2A);  // включить прерывания по совпадению COMPA
+  TCCR0B = 0x02;
+  TIMSK0 |= (1 << OCIE0B);
 
   // ---------- RTC -----------
   rtc.begin();
@@ -85,4 +81,17 @@ void setup() {
 
   // скорость режима при запуске
   flipTimer.setInterval(FLIP_SPEED[FLIP_EFFECT]);
+
+  btnSet.setDebounce(80*RECALIBRATE_MILLIS);
+  btnSet.setTimeout(300*RECALIBRATE_MILLIS);
+  btnSet.setClickTimeout(500*RECALIBRATE_MILLIS);
+  btnSet.setStepTimeout(400*RECALIBRATE_MILLIS);
+  btnL.setDebounce(80*RECALIBRATE_MILLIS);
+  btnL.setTimeout(300*RECALIBRATE_MILLIS);
+  btnL.setClickTimeout(500*RECALIBRATE_MILLIS);
+  btnL.setStepTimeout(400*RECALIBRATE_MILLIS);
+  btnR.setDebounce(80*RECALIBRATE_MILLIS);
+  btnR.setTimeout(300*RECALIBRATE_MILLIS);
+  btnR.setClickTimeout(500*RECALIBRATE_MILLIS);
+  btnR.setStepTimeout(400*RECALIBRATE_MILLIS);
 }

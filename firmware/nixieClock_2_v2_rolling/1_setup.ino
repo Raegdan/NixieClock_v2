@@ -63,6 +63,18 @@ void setup() {
    EEPROM.get(4, alm_hrs);  //Читаем часы будильника из памяти
    EEPROM.get(5, alm_mins);  //Читаем минуты будильника из памяти
 
+  // Если не хватает места в программной флеш памяти (атмега168) можно прошить мелодию в ипром
+  /*
+  uint16_t song[] = {494,200,0,300,740,200,0,50,494,200,0,50,784,200,0,300,740,200,0,50,659,200,
+                    0,50,740,200,0,300,659,200,0,50,740,200,0,50,784,200,0,50,784,200,0,50,
+                    740,200,0,50,659,200,0,50,494,200,0,300,740,200,0,50,494,200,0,50,784,200,
+                    0,300,740,200,0,50,659,200,0,50,587,200,0,300,659,200,0,50,587,200,0,50,554,
+                    200,0,50,554,200,0,50,587,200,0,50,554,200,0,50,494,200};
+  const uint8_t songLength = sizeof(song) / sizeof(song[0]);
+  EEPROM.put(100,songLength);
+  EEPROM.put(101,song);
+  */
+
   sendTime(hrs, mins);  // отправить время на индикаторы
   changeBright();       // изменить яркость согласно времени суток
 
@@ -93,9 +105,9 @@ void setup() {
   btnL.setDebounce(80*RECALIBRATE_MILLIS);
   btnL.setTimeout(300*RECALIBRATE_MILLIS);
   btnL.setClickTimeout(500*RECALIBRATE_MILLIS);
-  btnL.setStepTimeout(800*RECALIBRATE_MILLIS);
+  btnL.setStepTimeout(400*RECALIBRATE_MILLIS);
   btnR.setDebounce(80*RECALIBRATE_MILLIS);
   btnR.setTimeout(300*RECALIBRATE_MILLIS);
   btnR.setClickTimeout(500*RECALIBRATE_MILLIS);
-  btnR.setStepTimeout(800*RECALIBRATE_MILLIS);
+  btnR.setStepTimeout(400*RECALIBRATE_MILLIS);
 }

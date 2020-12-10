@@ -10,5 +10,7 @@ void loop() {
   buttonsTick();                                  // кнопки
   settingsTick();                                 // настройки
   Alarm(); 
+  #if (ALARM_TYPE == 1)
   playerTick();
+  #endif
 }

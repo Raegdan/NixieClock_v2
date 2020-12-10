@@ -39,14 +39,6 @@ boolean timerMinim::isReady() {
     return false;
   }
 }
-void timerMinim::stop() 
-{
-  _state = false;
-}
-void timerMinim::start() 
-{
-  _state = true;
-}
 
 void timerMinim::reset() {
   _timer = millis();

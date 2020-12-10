@@ -2,7 +2,7 @@ void Alarm(){
   if (mins==alm_mins && secs==5 && hrs==alm_hrs && ALARM_POWER)//Условие срабатывания будильника
         {             
           alm_flag=1;
-          almTimer.start();
+          almTimer.reset();
         }           
          // Аларм звук и миганиц цифер
         if (alm_flag) 
@@ -27,7 +27,7 @@ void Alarm(){
             if (almTimer.isReady()) //Выключить Будильник 
           {
             alm_flag = 0;
-            almTimer.stop();            
+   //         almTimer.stop();            
             alarmStop();
             lampState = 1;
             anodeStates[0] = 1;

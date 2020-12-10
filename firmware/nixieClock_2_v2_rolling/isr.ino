@@ -2,7 +2,7 @@ volatile boolean f = false;
 volatile uint8_t dynCounter=0;
 volatile uint8_t beepCounter=0;
 
-ISR(TIMER0_COMPB_vect) {
+void dynInd() {
     indiCounter[curIndi]++;             // счётчик индикатора
     if (indiCounter[curIndi] >= indiDimm[curIndi])  // если достигли порога диммирования
       setPin(opts[curIndi], 0);         // выключить текущий индикатор
@@ -26,4 +26,19 @@ ISR(TIMER0_COMPB_vect) {
 void beepTick() {
     f=!f;
     setPin(PIEZO,f);
+}
+
+// динамическая индикация в прерывании таймера 2
+ISR(TIMER2_COMPA_vect) {
+  if (dynCounter == 0) dynInd();
+  dynCounter++;
+  dynCounter%=8;
+
+  #if (BEEPER_TYPE == 0)
+  if (isBeeping){
+    if (beepCounter == 0) beepTick();
+    beepCounter++;
+    beepCounter%=9;
+  }
+  #endif
 }

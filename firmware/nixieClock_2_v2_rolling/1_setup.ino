@@ -23,6 +23,9 @@ void setup() {
   // включаем ШИМ
   setPWM(9, DUTY);
 
+  // Перенастраиваем таймер 0 на 8 кГц.
+  // Требуется перекалибровка штатных функций времени Arduino
+  // Используем канал прерываний B, т.к. в канале А живут вышеупомянутые функции
   TCCR0B = 0x02;
   TIMSK0 |= (1 << OCIE0B);
 
@@ -82,6 +85,7 @@ void setup() {
   // скорость режима при запуске
   flipTimer.setInterval(FLIP_SPEED[FLIP_EFFECT]);
 
+  // Перекалибровка таймингов кнопок из-за перенастройки таймера 0
   btnSet.setDebounce(80*RECALIBRATE_MILLIS);
   btnSet.setTimeout(300*RECALIBRATE_MILLIS);
   btnSet.setClickTimeout(500*RECALIBRATE_MILLIS);

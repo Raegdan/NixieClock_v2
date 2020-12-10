@@ -1,6 +1,4 @@
-volatile boolean f = false;
-volatile uint8_t dynCounter=0;
-volatile uint8_t beepCounter=0;
+// динамическая индикация по прерыванию канала B таймера 0
 
 ISR(TIMER0_COMPB_vect) {
     indiCounter[curIndi]++;             // счётчик индикатора
@@ -21,9 +19,4 @@ ISR(TIMER0_COMPB_vect) {
         setPin(opts[curIndi], anodeStates[curIndi]);    // включить анод на текущую лампу
       }
     }
-}
-
-void beepTick() {
-    f=!f;
-    setPin(PIEZO,f);
 }

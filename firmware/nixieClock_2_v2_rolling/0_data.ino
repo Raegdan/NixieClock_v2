@@ -1,4 +1,5 @@
-#define RECALIBRATE_MILLIS 8
+// Перекалибровка миллисов
+#define RECALIBRATE_MILLIS 8	// Во сколько раз повышена частота таймера 0 относительно дефолта
 #define delay(x) (delay((x)*RECALIBRATE_MILLIS))
 #define delayMicroseconds(x) (delayMicroseconds((x)*RECALIBRATE_MILLIS))
 #define millis() (millis() / RECALIBRATE_MILLIS)
@@ -167,7 +168,7 @@ void setPWM(uint8_t pin, uint16_t duty) {
 void beep(boolean on) {
   #if (BEEPER_TYPE == 0)
   if (on) {
-    tone(PIEZO,600);
+    tone(PIEZO,BEEPER_FREQ);
   } else {
     noTone(PIEZO);
   }

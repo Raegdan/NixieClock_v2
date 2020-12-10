@@ -165,6 +165,28 @@ void setPWM(uint8_t pin, uint16_t duty) {
   }
 }
 
+void alarmStart() {
+	#if (ALARM_TYPE == 0)
+		beep(true);
+	#elif (ALARM_TYPE == 1)
+		play();
+	#endif
+}
+
+void alarmPause() {
+	#if (ALARM_TYPE == 0)
+		beep(false);
+	#endif
+}
+
+void alarmStop() {
+	#if (ALARM_TYPE == 0)
+		beep(false);
+	#elif (ALARM_TYPE == 1)
+		noPlay();
+	#endif
+}
+
 void beep(boolean on) {
   #if (BEEPER_TYPE == 0)
   if (on) {

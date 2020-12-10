@@ -234,7 +234,7 @@ void buttonsTick()
     if(curMode == 0 && alm_flag)
     {
        alm_flag=0;
-       noPlay();
+       alarmStop();
        lampState = 1;
        anodeStates[0] = 1;
        anodeStates[1] = 1;

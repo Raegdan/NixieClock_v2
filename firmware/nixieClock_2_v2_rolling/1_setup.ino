@@ -89,9 +89,9 @@ void setup() {
   btnL.setDebounce(80*RECALIBRATE_MILLIS);
   btnL.setTimeout(300*RECALIBRATE_MILLIS);
   btnL.setClickTimeout(500*RECALIBRATE_MILLIS);
-  btnL.setStepTimeout(400*RECALIBRATE_MILLIS);
+  btnL.setStepTimeout(800*RECALIBRATE_MILLIS);
   btnR.setDebounce(80*RECALIBRATE_MILLIS);
   btnR.setTimeout(300*RECALIBRATE_MILLIS);
   btnR.setClickTimeout(500*RECALIBRATE_MILLIS);
-  btnR.setStepTimeout(400*RECALIBRATE_MILLIS);
+  btnR.setStepTimeout(800*RECALIBRATE_MILLIS);
 }

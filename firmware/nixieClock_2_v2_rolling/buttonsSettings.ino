@@ -182,7 +182,6 @@ void buttonsTick()
     switch (curMode) 
      {//Запись после настройки
         case 0:
-        newTimeFlag = true;
         if(noChech==0)
         {
           hrs = changeHrs;
@@ -194,7 +193,8 @@ void buttonsTick()
         alm_mins = changeMins2;
         EEPROM.put(4, alm_hrs);     // часы будильника
         EEPROM.put(5, alm_mins);     // минуты будильника        
-        changeBright();        
+        setNewTime();
+        changeBright();      
         break;        
         case 1:
         changeHrs2 = alm_hrs;
@@ -221,7 +221,7 @@ void buttonsTick()
         beep(1);       
         delay(200);          
         beep(0);   
-        newTimeFlag=1;               
+        setNewTime();             
       } 
       else
       {

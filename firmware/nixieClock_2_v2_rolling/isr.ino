@@ -20,3 +20,7 @@ ISR(TIMER0_COMPB_vect) {
       }
     }
 }
+
+ISR(TIMER2_COMPA_vect) {
+  PORTD ^= B00000100;
+}

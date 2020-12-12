@@ -97,7 +97,7 @@
 
 #define BEEPER_FREQ 700	// при BEEPER_TYPE=0: частота пищания
 
-#define ALARM_TYPE 0
+#define ALARM_TYPE 1
 // 0 - пищание, синхронное с миганием цифр
 // 1 - проигрывание мелодии (только для BEEPER_TYPE=0)
 

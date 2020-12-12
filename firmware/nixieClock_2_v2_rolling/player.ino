@@ -1,5 +1,5 @@
 // Проигрыватель мелодии будильника
-// Использует tone() т.е. таймер 2
+// Использует таймер 2
 
 // Формат: {частота_ноты_1, длительность_ноты_1, ....., частота_ноты_N, длительность_ноты_N}
 // Пауза - это нота с частотой 0
@@ -39,23 +39,23 @@ void play() {
 
 void noPlay() {
   playing = false;
-  noTone(PIEZO);
+  beep(0);
 }
 
 void playerTick() {
   if (playing && playTimer.isReady()) {
 
     if (playCounter >= songLength) {
-      noTone(PIEZO);
+      beep(0);
       playCounter = 0;
       playTimer.setInterval(repeatDelay);
       playTimer.reset();
     } else {
     
       if(song[playCounter] > 0) {
-        tone(PIEZO, song[playCounter]);
+        beep(1, song[playCounter]);
       } else {
-        noTone(PIEZO);
+        beep(0);
       }
       
       playTimer.setInterval(song[playCounter+1]);

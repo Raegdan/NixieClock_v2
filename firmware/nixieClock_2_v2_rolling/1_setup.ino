@@ -29,6 +29,8 @@ void setup() {
   TCCR0B = 0x02;
   TIMSK0 |= (1 << OCIE0B);
 
+  Timer2.setFrequency(BEEPER_FREQ);
+
   // ---------- RTC -----------
   rtc.begin();
   if (rtc.lostPower()) {
@@ -110,4 +112,7 @@ void setup() {
   btnR.setTimeout(300*RECALIBRATE_MILLIS);
   btnR.setClickTimeout(500*RECALIBRATE_MILLIS);
   btnR.setStepTimeout(400*RECALIBRATE_MILLIS);
+
+  syncTime();
+  setNewTime();
 }

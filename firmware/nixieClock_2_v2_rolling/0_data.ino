@@ -10,6 +10,7 @@
 #include <GyverButton.h>
 #include <RTClib.h>
 #include <EEPROM.h>
+#include <GyverTimers.h>
 
 RTC_DS3231 rtc;
 
@@ -187,14 +188,19 @@ void alarmStop() {
 	#endif
 }
 
-void beep(boolean on) {
-  #if (BEEPER_TYPE == 0)
+void beep(boolean on, uint32_t freq) {
+    #if (BEEPER_TYPE == 0)
   if (on) {
-    tone(PIEZO,BEEPER_FREQ);
+    Timer2.setFrequency(freq*2);
+    Timer2.enableISR();
   } else {
-    noTone(PIEZO);
-  }
+    Timer2.disableISR();
+   }
   #elif (BEEPER_TYPE == 1)
   setPin(PIEZO, on);
   #endif
+}
+
+void beep(boolean on) {
+  beep(on, BEEPER_FREQ);
 }

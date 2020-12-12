@@ -13,11 +13,8 @@ void calculateTime() {
     sinCount++;   
     if (sinCount >= 30)   {            // каждые 30 сек
         sinCount = 0;
-        DateTime now = rtc.now();       // синхронизация с RTC
-        secs = now.second();
-        mins = now.minute();
-        hrs = now.hour();
-      }      
+        syncTime();
+    }      
     if (secs > 59) 
     {
       newTimeFlag = true;   // флаг что нужно поменять время
@@ -33,4 +30,11 @@ void calculateTime() {
     }
     if (newTimeFlag) setNewTime();         // обновляем массив времени    
   }   
+}
+
+void syncTime() {
+  DateTime now = rtc.now();       // синхронизация с RTC
+  secs = now.second();
+  mins = now.minute();
+  hrs = now.hour();
 }
